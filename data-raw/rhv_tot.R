@@ -56,9 +56,9 @@ clean_dat <- function(site_no, beg_date) {
 
 ## get data frame with all stations
 stations <- c("10311000", "10310500", "10309000", "10311200",
-              "10311100", "10308200", "10310000")
+              "10311100", "10308200")
 beg_dates <- c("1939-05-12", "1948-03-01", "1900-01-02", "1976-07-01",
-               "1976-06-01", "1960-09-01", "1900-10-02")
+               "1976-06-01", "1960-09-01")
 stat_list <- vector("list", length = length(stations))
 for (i in seq_along(stations)) {
   stat_list[[i]] <- clean_dat(stations[i], beg_dates[i])
