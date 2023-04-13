@@ -27,10 +27,32 @@ df_peaks_all <- function(minpeaks_spec = 100) {
   peaks_df
 }
 
+#' df_peaks_filt
+#'
+#' This function filters through the dataset peaks_list and filters for the
+#' user specified station, and peak level.
+#'
+#' @param station A character or numeric object which specifies which station
+#' the user is interested in. Must be one of the following station ID's:
+#' '10311000', '10310500' , '10309000', '10311200', '10311100', or '10308200'.
+#' @param minpeak_spec A numeric object either 100, 75, or 50, which specifies
+#' which peak level to filter for.
+#'
+#'
+#' @return A data frame that includes id, date and time,
+#' flow, and type of flood
 #' @export
 df_peaks_filt <- function(station, minpeaks_spec = 100) {
+  char_station <- as.character(station)
+  correct_ids <- c('10311000', '10310500' , '10309000',
+                   '10311200', '10311100', '10308200')
+  if(!(char_station %in% correct_ids)) {
+    stop("Invalid station id. Station must be one of the following :
+         '10311000', '10310500' , '10309000', '10311200', '10311100',
+         '10308200'")
+  }
   df_peaks_all <- df_peaks_all(minpeaks_spec)
-  filt <- dplyr::filter(df_peaks_all, id == as.character(station))
+  filt <- dplyr::filter(df_peaks_all, id == char_station)
   filt
 }
 
