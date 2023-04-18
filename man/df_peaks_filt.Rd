@@ -12,8 +12,7 @@ the user is interested in. Must be one of the following station ID's:
 '10311000', '10310500' , '10309000', '10311200', '10311100', or '10308200'.}
 
 \item{minpeak_spec}{A numeric object either 100, 75, or 50, which specifies
-which peak level to filter for.
-#'}
+which peak level to filter for.}
 }
 \value{
 A data frame that includes id, date and time,
