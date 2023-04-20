@@ -44,9 +44,9 @@ df_peaks_all <- function(minpeaks_spec = 100) {
 #' @export
 df_peaks_filt <- function(station, minpeaks_spec = 100) {
   char_station <- as.character(station)
-  correct_ids <- c('10311000', '10310500' , '10309000',
-                   '10311200', '10311100', '10308200')
-  if(!(char_station %in% correct_ids)) {
+  correct_ids <- c("10311000", "10310500", "10309000",
+                   "10311200", "10311100", "10308200")
+  if (!(char_station %in% correct_ids)) {
     stop("Invalid station id. Station must be one of the following :
          '10311000', '10310500' , '10309000', '10311200', '10311100',
          '10308200'")
@@ -57,8 +57,8 @@ df_peaks_filt <- function(station, minpeaks_spec = 100) {
 }
 
 peakdf <- function(df, fs, minpeak, min_cutoff, maj_cutoff = 1) {
-  peakspor <- cardidates::peakwindow(df$datetime, df$max_flow, minpeak = minpeak,
-  )
+  peakspor <- cardidates::peakwindow(df$datetime, df$max_flow,
+                                     minpeak = minpeak)
   peakspordf <- peakspor[[1]]
   dt <- as.POSIXct(peakspor[[1]][, 3], "US/Pacific", origin = "1970-01-01")
   peakspordf$dt <- dt
@@ -96,5 +96,3 @@ mm_cutoff <- function(df, min_cutoff, maj_cutoff) {
   }
   type
 }
-
-
