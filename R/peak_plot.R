@@ -111,5 +111,3 @@ peak_plot <- function(station, peaks, beg_date, end_date) {
 #               ifelse(y_max + 0.2 * y_max > 200,
 #                      seq(0, y_max + 0.2 * y_max, 100),
 #                      seq(0, y_max + 0.2 * y_max, 10))))
-
-

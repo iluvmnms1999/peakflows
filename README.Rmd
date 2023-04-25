@@ -1,0 +1,67 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# peakflows
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of peakflows is to ...
+
+## Installation
+
+You can install the development version of peakflows from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("iluvmnms1999/peakflows")
+```
+
+## Introduction to the Data
+The package was built around data provided from the USGS website (https://waterdata.usgs.gov/nwis/) which contains streamflow information for several stream gauges in the Sierra Nevadas.
+
+<!--- Maybe we can include a table with some of the data... even a head() of what the data kind of looks like-->
+
+```{r example}
+library(peakflows)
+```
+
+## Package Functions
+
+___ functions were created to analyse the streamflow data. 
+
+df_peaks_all description (?)
+
+The function df_peaks_filt... (description) 
+
+The function peak_plot plots the peak streamflows... (description)
+
+## Example
+
+This is a basic example which shows you how the peakflows function works:
+
+<!--- Maybe include a summary of our dataset/the parameters? Possibly added earlier on while explaining the dataset-->
+
+```{r}
+summary(cars) 
+```
+
+To visualize the peak flows over a specific period of time at a specific station, the peak_plot function can be used.
+
+```{r pressure, echo = FALSE}
+plot(pressure) ### create a plot using peak_flows function
+```
+From Figure... we can conclude...
+
