@@ -1,5 +1,16 @@
-#' @export
+#' df_peaks_all
+#'
+#' This function makes a dataframe containing peak information for all stations
+#' based off of the flood type parameter
+#'
+#' @param minpeaks_spec A number that is equal to 50, 75, or 100. This parameter
+#'                      specifies the type of flood that the user wants the
+#'                      peak information for.
+#' @examples
+#' df_peaks_all(50)
+#' df_peaks_all(75)
 ## get peaks for all stations with specified minpeaks according to stages
+#' @export
 df_peaks_all <- function(minpeaks_spec = 100) {
   peaks_list <- vector("list", length = nrow(cutoffs))
   for (i in seq_len(nrow(cutoffs))) {
