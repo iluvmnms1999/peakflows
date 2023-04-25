@@ -17,3 +17,26 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(peakflows)
 ```
+
+## Introduction
+
+## Data
+
+## Subsetting the Peak Level
+
+### Example
+
+## Sort by Station
+
+### Example
+
+## Plotting the Data
+
+### Example
+
+## Summary
+
+## Conclusion
+
+
+
