@@ -18,3 +18,7 @@ Imports:
     lubridate,
     plyr
 LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
