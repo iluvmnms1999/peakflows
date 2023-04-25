@@ -35,3 +35,70 @@ df_peaks_all <- function(minpeaks_spec = 100) {
   peaks_df <- as.data.frame(peaks_mat)
   peaks_df
 }
+
+
+
+
+
+
+
+
+
+
+
+
+---
+  title: "peak-flows-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{peak-flows-vignette}
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEncoding{UTF-8}
+---
+
+  ```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(peakflows)
+```
+
+## Introduction
+
+## Data
+
+## Subsetting the Peak Level
+# This function will take flooding data (peaks) from all of the stations. The user will specify
+# the subset of flooding data that will be returned by calling the df_peaks_all function and inputting
+# either a 50, 75, or 100 as the argument. Entering a 100 will return a data frame containing
+# peaks that are above the flooding threshold. Entering a 75 will return a data frame containing
+# peaks that are above the flooding threshold and all peaks that are above 75% of the
+# flooding threshold. Entering a 50 will return a data frame containing peaks that are above
+# the flooding threshold and all peaks that are above 50% of the flooding threshold. The data frame
+# that is returned by this function can then be used for further analysis.
+
+
+### Example
+# The following code demonstrates how the df_peaks_all function is called and the
+# three arguments that can be used.
+# df_peaks_all(100)
+# df_peaks_all(75)
+# df_peaks_all(50)
+
+
+## Sort by Station
+
+### Example
+
+## Plotting the Data
+
+### Example
+
+## Summary
+
+## Conclusion
+
