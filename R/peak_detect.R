@@ -35,7 +35,7 @@ df_peaks_all <- function(minpeaks_spec = 100) {
 #' @param station A character or numeric object which specifies which station
 #' the user is interested in. Must be one of the following station ID's:
 #' '10311000', '10310500' , '10309000', '10311200', '10311100', or '10308200'.
-#' @param minpeak_spec A numeric object either 100, 75, or 50, which specifies
+#' @param minpeaks_spec A numeric object either 100, 75, or 50, which specifies
 #' which peak level to filter for.
 #'
 #'
