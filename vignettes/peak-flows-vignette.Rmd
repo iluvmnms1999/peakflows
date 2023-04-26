@@ -14,29 +14,95 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(peakflows)
+## Introduction
+The peakflows package was built around data provided from the USGS website (https://waterdata.usgs.gov/nwis/) which contains streamflow information for several stream gauges in the Sierra Nevadas. The purpose of the peakflows package is to allow the user to extract and subset data and easily understand when the discharged streamflow was a flood, major, or minor.
+
+The peakflows package can be installed directly from the development version of peakflows from [GitHub](https://github.com/) with the following code:
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("iluvmnms1999/peakflows")
 ```
 
-## Introduction
+
+The peakflows package can be called using the following code:
+
+```{r setup}
+library(peakflows)
+
+```
 
 ## Data
+The data includes information from six USGS stations from Nevada including: Carson River near Carson City (10311000), Clear Creek near Carson City (10310500), East Fork Carson River near Gardnerville (10309000), Ash Canyon Creek near Carson City (10311200), Kings Canyon Creek near Carson City (10311100), and East Fork Carson River below Markleeville (10308200).
+
+The data was simplified to condense the package size; however, the dataset is large as the info for each site is necessary. Due to the large dataset, some error checks are not met.
 
 ## Subsetting the Peak Level
+This function will take flooding data (peaks) from all of the stations. The user will specify the subset of flooding data that will be returned by calling the df_peaks_all function and inputting either a 50, 75, or 100 as the argument. Entering a 100 will return a data frame containing peaks that are above the flooding threshold. Entering a 75 will return a data frame containing peaks that are above the flooding threshold and all peaks that are above 75% of the flooding threshold. Entering a 50 will return a data frame containing peaks that are above the flooding threshold and all peaks that are above 50% of the flooding threshold. The data frame that is returned by this function can then be used for further analysis.
 
 ### Example
+The following code demonstrates how the df_peaks_all function is called and the three arguments that can be used. Only portions of the df_peaks_all function is called as each dataframe contains 80, 129, and 249, respectively.
+
+The head and tail of df_peaks_all with an argument of 100:
+```{r}
+head(df_peaks_all(100))
+
+tail(df_peaks_all(100))
+
+```
+
+The first 10 rows of df_peaks_all with argument of 75:
+```{r}
+df_peaks_all(75)[1:10, ]
+
+```
+
+The head and tail of df_peaks_all with argument of 50:
+```{r}
+head(df_peaks_all(50))
+
+tail(df_peaks_all(50))
+```
+
 
 ## Sort by Station
+Say that we are only interested at looking at the information from Kings Canyon Creek, and we want to see any floods that are at 75 percent flood level. We can filter for these specific data as well using the df_peaks_filt() function. This function is very similar to the above function but it will also filter the data based on station. The station must be from one of the specifc stations in the data set and one of the specified flood levels.
 
 ### Example
+Below is an example finding the peaks above 75 percent flood level for Kings Canyon Creek.
+
+```{r}
+df_peaks_filt(station = "10311100", minpeaks_spec = 75)
+
+```
 
 ## Plotting the Data
+The purpose of the peak_plot function is to graph the Streamflow Peaks at each station over a specific period of time. This allows the user to see whether or not there was a flood over that specific period of time at the station. The x-axis contains the range of dates provided, while the y-axis contains reflects the discharge amount. The resulting graphs contain colored dots to represent whether the peak was a flood, major, minor, or none. Red represents a flood or major amount of flood water. Yellow represents a minor amount of discharged flood water.
 
 ### Example
+An example of the peak_plot function is to take a scenario where the user wants to see which stations had floods over January 2017. For simplicity, only three stations will be plotted with peaks of 100.
+
+```{r, warning = FALSE, fig.cap = "Figure 1: peak_flows plot for station 10311000 over January 2017"}
+peak_plot(station = 10311000, peaks = 100,
+          beg_date = 2017010100, end_date = 2017020100)
+```
+
+Figure 1 contains the peak_plot function for the station Carson River near Carson City (10311000). This plot shows that the data contains a flood or major discharge amount of water.
+
+```{r, warning = FALSE, fig.cap = "Figure 2: peak_flows plot for station 10311100 over January 2017"}
+peak_plot(station = 10311100, peaks = 100,
+          beg_date = 2017010100, end_date = 2017020100)
+```
+
+Figure 2 contains the peak_plot function for the station Kings Canyon Creek near Carson City (10311100) had multiple floods or major amounts of discharge over the month of January in 2017.
+
+```{r, warning = FALSE, fig.cap = "Figure 3: peak_flows plot for station 10308200 over January 2017"}
+peak_plot(station = 10308200, peaks = 100,
+          beg_date = 2017010100, end_date = 2017020100)
+```
+
+Figure 3 contains the peak_plot function for the station East Fork Carson River below Markleeville (10308200) only had one minor flood during the month of January in 2017.
 
 ## Summary
 
-## Conclusion
-
-
-
+The peakflows package uses streamflow data provided from the USGS website to organize the Data through subsetting the peak level, sort by station, and plot the data over a period of time. This package allows the user to easily understand when the discharged streamflow was a flood, major, or minor.

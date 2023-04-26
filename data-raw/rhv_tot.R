@@ -42,7 +42,7 @@ clean_dat <- function(site_no, beg_date) {
   # HOURLY create vector of dates/ids
   datetime <- seq(test$datetime[1],
                   with_tz(Sys.Date(), tzone = "US/Pacific"),
-                  by = 'hour'
+                  by = "hour"
   )
   id <- rep(usgs$site_no[1], times = length(datetime))
   df <- data.frame(id, datetime)
