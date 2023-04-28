@@ -7,7 +7,6 @@
 #' @export
 #' @examples
 #' df_peaks_all(50)
-#' df_peaks_all(75)
 ## get peaks for all stations with specified minpeaks according to stages
 df_peaks_all <- function(minpeaks_spec = 100) {
   peaks_list <- vector("list", length = nrow(cutoffs))
@@ -72,22 +71,19 @@ library(peakflows)
 ## Data
 
 ## Subsetting the Peak Level
-# This function will take flooding data (peaks) from all of the stations. The user will specify
-# the subset of flooding data that will be returned by calling the df_peaks_all function and inputting
-# either a 50, 75, or 100 as the argument. Entering a 100 will return a data frame containing
-# peaks that are above the flooding threshold. Entering a 75 will return a data frame containing
+# This function takes flooding data (peaks) from all of the stations. The user specifies
+# the subset of flooding data that is of interest by calling the df_peaks_all function and inputting
+# either a 50, 75, or 100 as the argument. Entering a 100 returns a data frame containing
+# peaks that are above the flooding threshold. Entering a 75 returns a data frame containing
 # peaks that are above the flooding threshold and all peaks that are above 75% of the
-# flooding threshold. Entering a 50 will return a data frame containing peaks that are above
+# flooding threshold. Entering a 50 returns a data frame containing peaks that are above
 # the flooding threshold and all peaks that are above 50% of the flooding threshold. The data frame
 # that is returned by this function can then be used for further analysis.
 
 
 ### Example
-# The following code demonstrates how the df_peaks_all function is called and the
-# three arguments that can be used.
+# The following code demonstrates how to call the df_peaks_all function.
 # df_peaks_all(100)
-# df_peaks_all(75)
-# df_peaks_all(50)
 
 
 ## Sort by Station
