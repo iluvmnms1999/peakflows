@@ -20,7 +20,7 @@ The peakflows package is built around data provided from the USGS website (https
 The peakflows package can be installed directly from the development version of peakflows from [GitHub](https://github.com/) with the following code:
 
 ```{r, eval = FALSE}
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("iluvmnms1999/peakflows")
 ```
 
