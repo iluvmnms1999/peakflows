@@ -36,8 +36,11 @@ library(peakflows)
 
 The data was extracted from the USGS website (https://waterdata.usgs.gov/nwis/). The data includes information from six USGS stations from Nevada including: Carson River near Carson City (10311000), Clear Creek near Carson City (10310500), East Fork Carson River near Gardnerville (10309000), Ash Canyon Creek near Carson City (10311200), Kings Canyon Creek near Carson City (10311100), and East Fork Carson River below Markleeville (10308200).
 
+The data also contain information about flood cutoffs. River stations including Carson River, East Fork Carson River near Gardnerville, and East Fork Carson River below Markleeville, label floods as 
+either minor or major floods. These labels come from the California Nevada River Forecast Center Website (https://www.cnrfc.noaa.gov/). Each station has these cutoffs at different flood levels. Creek stations such as Clear Creek, Ash Canyon Creek, and Kings Canyon Creek do not have different levels of cutoffs, there is only either a flood or not a flood. 
+
 ## Subsetting the Peak Level
-This function takes flooding data (peaks) from all of the stations. The user specifies the subset of flooding data that is returned by calling the df_peaks_all function and inputting either a 50, 75, or 100 as the argument. Entering a 100 returns a data frame containing peaks that are above the flooding threshold. Entering a 75 returns a data frame containing peaks that are above the flooding threshold and all peaks that are above 75% of the flooding threshold. Entering a 50 returns a data frame containing peaks that are above the flooding threshold and all peaks that are above 50% of the flooding threshold. The data frame that is returned by this function is then used for further analysis.
+This function takes flooding data (peaks) from all of the stations. The peaks are local maximums found within the data and are found by using the peakwindow function from the cardidates package within the df_peaks_all function. The user specifies the subset of flooding data that is returned by calling the df_peaks_all function and inputting either a 50, 75, or 100 as the argument. Entering a 100 returns a data frame containing peaks that are above the flooding threshold. Entering a 75 returns a data frame containing peaks that are above the flooding threshold and all peaks that are above 75% of the flooding threshold. Entering a 50 returns a data frame containing peaks that are above the flooding threshold and all peaks that are above 50% of the flooding threshold. The data frame that is returned by this function is then used for further analysis.
 
 ### Example
 The following code demonstrates how the df_peaks_all function is called and the three arguments that can be used. Only portions of the df_peaks_all function is called as each dataframe contains 80, 129, and 249, respectively.
@@ -55,7 +58,7 @@ df_peaks_all(75)[1:10, ]
 ```
 
 ## Sort by Station
-Say that we are only interested at looking at the information from Kings Canyon Creek, and we want to see any floods that are at 75 percent flood level. We can filter for these specific data as well using the df_peaks_filt() function. This function is very similar to the above function but it also filters the data based on station. The station must be from one of the specifc stations in the data set and one of the specified flood levels.
+Say that we are only interested at looking at the information from Kings Canyon Creek, and we want to see any floods that are at 75 percent flood level. We can filter for these specific data as well using the df_peaks_filt() function. This function is very similar to the above function but it also filters the data based on station. This function calls the df_peaks_all function inside and then filters the output by station. The station must be from one of the specifc stations in the data set and one of the specified flood levels must be used.
 
 ### Example
 Below is an example finding the first 6 peaks peaks above 75 percent flood level for Kings Canyon Creek.
