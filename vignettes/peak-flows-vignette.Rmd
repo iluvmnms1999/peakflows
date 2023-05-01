@@ -61,7 +61,8 @@ Say that we are only interested at looking at the information from Kings Canyon 
 Below is an example finding the first 6 peaks peaks above 75 percent flood level for Kings Canyon Creek.
 
 ```{r}
-head(df_peaks_filt(station = "10311100", minpeaks_spec = 75))
+kings_can_75 <- df_peaks_filt(station = "10311100", minpeaks_spec = 75)
+head(kings_can_75)
 
 ```
 
