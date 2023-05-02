@@ -1,17 +1,21 @@
 Package: peakflows
-Title: Detects Peak Flow Data
+Title: Detect Peak Streamflow Data in Sierra Nevada
 Version: 0.0.0.9000
-Authors@R:
-    person("Clarissa", "Mantz", , "clarissa@mantz.us", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-    person("Ariel", "Norman", ,
-           "soccerariel14@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-    person("Emma", "Watts", , "iluvmnms1999@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-    person("Abby", "Wheeler", , "abbyw2298@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Clarissa", "Mantz", email = "clarissa@mantz.us",
+    role = "aut"),
+    person("Ariel", "Norman", email = "soccerariel14@gmail.com",
+    role = "aut"),
+    person("Emma", "Watts", email = "iluvmnms1999@gmail.com",
+    role = c("aut", "cre")),
+    person("Abby", "Wheeler", email = "abbyw2298@gmail.com",
+    role = "aut"))
+Description: A user-friendly flood/peak detection system for users interested
+    in analyzing floods and peaks flows for six specific stream gauges in the
+    Upper Carson HUC region in the Sierra Nevada. Package functionality allows
+    the user to extract and subset data for different minimum peak
+    specifications and easily identify peaks representing floods, as well as
+    differentiate between minor and major flood classifications when available.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -8,12 +8,12 @@
 
 ## Introduction
 
-The peakflows package is built around data provided from the USGS
-website (<https://waterdata.usgs.gov/nwis/>) which contains streamflow
-information for several stream gauges in the Sierra Nevadas. The purpose
-of the peakflows package is to allow the user to extract and subset data
-and easily understand when the discharged streamflow was a flood, major,
-or minor.
+The **peakflows** package is built around data provided from the USGS
+website (<https://waterdata.usgs.gov/nwis/>) containing streamflow
+information for six different stream gauges in the Sierra Nevada. Its
+purpose is to allow users to extract and subset peak data for specified
+stations and easily identify peaks representing floods, as well as
+differentiate between minor and major flood classifications if possible.
 
 The peakflows package can be installed directly from the development
 version of peakflows from [GitHub](https://github.com/) with the

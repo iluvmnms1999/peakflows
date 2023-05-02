@@ -1,0 +1,93 @@
+---
+title: "peak-flows-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{peak-flows-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+The **peakflows** package is built around data provided from the USGS website (https://waterdata.usgs.gov/nwis/) containing streamflow information for six different stream gauges in the Sierra Nevada. Its purpose is to allow users to extract and subset peak data for specified stations and easily identify peaks representing floods, as well as differentiate between minor and major flood classifications if possible.
+
+The peakflows package can be installed directly from the development version of peakflows from [GitHub](https://github.com/) with the following code:
+
+```{r, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("iluvmnms1999/peakflows")
+```
+
+
+The peakflows package can be called using the following code:
+
+```{r setup}
+library(peakflows)
+
+```
+
+## Data
+
+The package data supplied in *rhv_tot* was originally obtained from the USGS website (https://waterdata.usgs.gov/nwis/) using the **rsnodas2** package and contains cleaned hourly streamflow information for six USGS stations from Nevada including: Carson River near Carson City (10311000), Clear Creek near Carson City (10310500), East Fork Carson River near Gardnerville (10309000), Ash Canyon Creek near Carson City (10311200), Kings Canyon Creek near Carson City (10311100), and East Fork Carson River below Markleeville (10308200).
+
+The package data supplied by *cutoffs* contains information about flood stage cutoffs for each station. The larger river stations (Carson River, East Fork Carson River near Gardnerville, and East Fork Carson River below Markleeville) include differentiations between minor or major floods. These cutoff values come from the California Nevada River Forecast Center website (https://www.cnrfc.noaa.gov/). Each river station has its own unique cutoffs for major and minor flood levels. The smaller creek stations (Clear Creek, Ash Canyon Creek, and Kings Canyon Creek) do not have pre-defined flood stages publicly available, so the flood stage cutoffs were manually determined using the 75th quantile of the annual maximum streamflow for each individual station's period of record. For these creeks, there are no major or minor floods cutoffs provided - their peaks are simply classified as either "flood" or "not a flood."
+
+## Generating peak data
+*df_peaks_all()* reports streamflow peak data for all six stations. The peaks are local maximums located within the data using the *peakwindow()* function from the **cardidates** package. The user specifies the subset of peak data that is returned by calling *df_peaks_all()* and inputting either a 50, 75, or 100 as the argument. Entering 100 returns a data frame containing peaks that are at or above 100% of the given flood stage threshold. Entering 75 returns a data frame containing peaks that are above the flood stage threshold as well as all peaks that are above 75% of the flood stage threshold. Entering 50 returns a data frame containing peaks that are above the flood stage threshold as well as all peaks that are above 50% of the flood stage threshold. Note that entering 50 or 75 will return some peaks that are not necessarily floods because they include peaks that are below the flood stage threshold. 
+
+### Example
+The following code demonstrates how *df_peaks_all()* is called and the different arguments that can be passed to it. Only portions of the output are displayed in this example, as each dataframe produced contains 80, 129, and 249 rows, respectively.
+
+The first six rows of *df_peaks_all()* output with a peak specification of 100:
+```{r}
+head(df_peaks_all(100))
+
+```
+
+The first ten rows of *df_peaks_all()* output with peak specification of 75:
+```{r}
+df_peaks_all(75)[1:10, ]
+
+```
+
+## Generate peak data by station
+Say that we are only interested in looking at the information from Kings Canyon Creek, and we want to see any floods that are above 75% of the flood stage threshold. We can filter for this specific data using the *df_peaks_filt()* function. This function is very similar to *df_peaks_all()* but it allows the user to output peak information for a specific station (rather than all of the stations) by calling *df_peaks_all()* and filtering by station. The station specified must be one of the six stations included in the package data, and a peak specification of 50, 75, or 100 must be supplied.
+
+### Example
+Below is an example of finding the first six peaks above 75% of the flood stage threshold for Kings Canyon Creek.
+
+```{r}
+kings_can_75 <- df_peaks_filt(station = "10311100", minpeaks_spec = 75)
+head(kings_can_75)
+
+```
+
+## Plotting peaks 
+The purpose of the *peak_plot()* function is to graph the streamflow peaks at a given station over a user-specified period of time. This allows the user to visualize whether or not there was a flood (and whether it was classified as minor or major if that information is available) over that specific period of time at that particular station. It can also display peaks that are not classified as floods if the user uses a peak specification of 50 or 75. The x-axis reports the range of dates provided, while the y-axis displays the streamflow discharge amount in cubic feet per second. The resulting graph contains colored dots to represent whether the peak was a flood (and if it was major or minor) or not a flood at all. In stations where minor/major flood classifications were readily available: red = major flood, yellow = minor flood, green = not a flood. In stations where detailed classifications were not available: red = flood, green = not a flood.
+
+### Example
+In this example, the *peak_plot()* function is used to visualize peaks observed above 100% of flood stage threshold during January 2017.
+
+```{r, warning = FALSE, fig.cap = "Figure 1: peak_flows plot for station 10311000 for January 2017", fig.height = 4, fig.width = 5}
+peak_plot(station = 10311000, peaks = 100,
+          beg_date = 2017010100, end_date = 2017020100)
+```
+
+Figure 1 contains the *peak_plot()* output for the Carson River near Carson City station (10311000). This plot shows that the data contains a major flood during the specified time period.
+
+```{r, warning = FALSE, fig.cap = "Figure 2: peak_flows plot for station 10311100 over January 2017", fig.height = 4, fig.width = 5}
+peak_plot(station = 10311100, peaks = 100,
+          beg_date = 2017010100, end_date = 2017020100)
+```
+
+Figure 2 contains the *peak_plot()* output for the Kings Canyon Creek near Carson City station (10311100) and shows that it had multiple floods over the specified time period.
+
+## Summary
+
+The **peakflows** package uses streamflow data from the USGS website to produce peak information for six different streamflow gauge stations, allowing the user to sort peak data by station and plot data over a specified period of time. This functionality allows the user to easily understand when the discharged streamflow amounts qualify as a flood (major or minor when available) or not a flood. This facilitates user interaction, as the user only needs to input a few values to get the desired output from the data. Instead of having to figure out the logic, write complicated code, or research pre-defined flood stages and other necessary information, the user simply calls functions that are designed to perform the required tasks for them and skip straight to the production of the desired information. The fact that the data cleaning process is performed “under the hood” saves the user from needing to clean or scrape the data themselves. Using this package saves time and makes it easier for the user to get the information that they need for future applications and analyses related to flood data.
