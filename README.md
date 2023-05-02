@@ -4,6 +4,8 @@
 # peakflows
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/iluvmnms1999/peakflows/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/iluvmnms1999/peakflows/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Introduction
